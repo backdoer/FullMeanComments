@@ -17,6 +17,8 @@ angular.module('comment', [])
           comment.upvotes = data.upvotes;
         });
     };
+
+
 	$scope.incrementUpvotes = function(comment) {
 	  $scope.upvote(comment);
     };
@@ -24,6 +26,14 @@ angular.module('comment', [])
       return $http.get('/comments').success(function(data){
         angular.copy(data, $scope.comments);
       });
+    };
+
+      $scope.delete = function(comment) {
+      $http.delete('/comments/' + comment._id )
+        .success(function(data){
+          console.log("delete worked");
+        });
+      $scope.getAll();
     };
     $scope.getAll();
 
